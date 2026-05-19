@@ -9,7 +9,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Jost:wght@300;400;500&display=swap"
         rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
     <link rel="stylesheet" href="css/animation.css">
     <link rel="stylesheet" href="css/main.css">
     <script src="js/i18n.js" defer></script>
@@ -23,30 +23,34 @@
     <!-- NAVIGATION BAR-->
     <nav id="nav">
         <a class="nav-logo" href="#">Pua <span class="nav-logo-sep">/</span>Fustería</a>
-        <ul class="nav-links">
-            <li><a href="#about" data-i18n="nav.nosotros">Nosotros</a></li>
-            <li><a href="#services" data-i18n="nav.servicios">Servicios</a></li>
-            <li><a href="#products" data-i18n="nav.galeria">Productos</a></li>
-            <li><a href="#contact" class="nav-cta" data-i18n="nav.presupuesto">Contacto</a></li>
-        </ul>
+        <button class="nav-hamburger" id="navHamburger" aria-label="Abrir menú" aria-expanded="false">
+            <span></span><span></span><span></span>
+        </button>
         <div class="lang-switcher">
             <button class="lang-btn active" data-lang="es">
                 <img src="https://flagcdn.com/es.svg" alt="Español"> ES
             </button>
             <button class="lang-btn" data-lang="val">
                 <svg class="flag-val" viewBox="0 0 24 16" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="24" height="2" y="0" fill="#FFCC00"/>
-                    <rect width="24" height="2" y="2" fill="#C60B1E"/>
-                    <rect width="24" height="2" y="4" fill="#FFCC00"/>
-                    <rect width="24" height="2" y="6" fill="#C60B1E"/>
-                    <rect width="24" height="2" y="8" fill="#FFCC00"/>
-                    <rect width="24" height="2" y="10" fill="#C60B1E"/>
-                    <rect width="24" height="2" y="12" fill="#FFCC00"/>
-                    <rect width="24" height="2" y="14" fill="#C60B1E"/>
+                    <rect width="24" height="2" y="0" fill="#FFCC00" />
+                    <rect width="24" height="2" y="2" fill="#C60B1E" />
+                    <rect width="24" height="2" y="4" fill="#FFCC00" />
+                    <rect width="24" height="2" y="6" fill="#C60B1E" />
+                    <rect width="24" height="2" y="8" fill="#FFCC00" />
+                    <rect width="24" height="2" y="10" fill="#C60B1E" />
+                    <rect width="24" height="2" y="12" fill="#FFCC00" />
+                    <rect width="24" height="2" y="14" fill="#C60B1E" />
                 </svg> VAL
             </button>
         </div>
     </nav>
+    <!-- Menú móvil overlay (fuera del nav para evitar que backdrop-filter lo atrape) -->
+    <ul class="nav-links" id="navLinks">
+        <li><a href="#about" data-i18n="nav.nosotros">Nosotros</a></li>
+        <li><a href="#services" data-i18n="nav.servicios">Servicios</a></li>
+        <li><a href="gallery.html" data-i18n="nav.galeria">Productos</a></li>
+        <li><a href="#contact" class="nav-cta" data-i18n="nav.presupuesto">Contacto</a></li>
+    </ul>
 
     <!-- HERO SECTION -->
     <section class="hero">
@@ -70,7 +74,8 @@
                 <em data-i18n="hero.title3">sostenible</em>
             </h1>
             <div class="hero-div"></div>
-            <p class="hero-desc" data-i18n="hero.desc">Diseño, fabricación y restauración de mobiliario único con materiales reciclados y
+            <p class="hero-desc" data-i18n="hero.desc">Diseño, fabricación y restauración de mobiliario único con
+                materiales reciclados y
                 sostenibles. Cada pieza, una historia propia.</p>
             <div class="hero-actions">
                 <a href="#contact" class="btn-hero">
@@ -170,8 +175,10 @@
         </div>
         <div class="about-content">
             <p class="eyebrow reveal" data-i18n="about.eyebrow">Sobre Pua Fusteria</p>
-            <h2 class="section-title reveal"><span data-i18n="about.title">Muebles con</span><br><em data-i18n="about.title.em">alma propia</em></h2>
-            <p class="section-body reveal" data-i18n="about.body">Pua Fusteria nace de una pasión por la carpintería iniciada en 2019. Desde
+            <h2 class="section-title reveal"><span data-i18n="about.title">Muebles con</span><br><em
+                    data-i18n="about.title.em">alma propia</em></h2>
+            <p class="section-body reveal" data-i18n="about.body">Pua Fusteria nace de una pasión por la carpintería
+                iniciada en 2019. Desde
                 nuestro taller en Benlloc, creamos mobiliario artesanal con materiales reciclados: palets, restos de
                 poda y madera recuperada de derribos.</p>
             <div class="pillars reveal">
@@ -207,22 +214,26 @@
             <div class="process-step reveal">
                 <div class="step-circle">01</div>
                 <div class="step-name" data-i18n="step1.name">Consulta</div>
-                <p class="step-desc" data-i18n="step1.desc">Nos cuentas tu idea o el mueble que quieres recuperar. Sin compromiso.</p>
+                <p class="step-desc" data-i18n="step1.desc">Nos cuentas tu idea o el mueble que quieres recuperar. Sin
+                    compromiso.</p>
             </div>
             <div class="process-step reveal">
                 <div class="step-circle">02</div>
                 <div class="step-name" data-i18n="step2.name">Diseño</div>
-                <p class="step-desc" data-i18n="step2.desc">Exploramos juntos materiales, estilos y medidas hasta dar con la pieza perfecta.</p>
+                <p class="step-desc" data-i18n="step2.desc">Exploramos juntos materiales, estilos y medidas hasta dar
+                    con la pieza perfecta.</p>
             </div>
             <div class="process-step reveal">
                 <div class="step-circle">03</div>
                 <div class="step-name" data-i18n="step3.name">Fabricación</div>
-                <p class="step-desc" data-i18n="step3.desc">Trabajamos con materiales reciclados y técnicas artesanales. Con tiempo y detalle.</p>
+                <p class="step-desc" data-i18n="step3.desc">Trabajamos con materiales reciclados y técnicas artesanales.
+                    Con tiempo y detalle.</p>
             </div>
             <div class="process-step reveal">
                 <div class="step-circle">04</div>
                 <div class="step-name" data-i18n="step4.name">Entrega</div>
-                <p class="step-desc" data-i18n="step4.desc">Tu pieza lista e instalada. Única, sostenible y hecha para durar toda la vida.</p>
+                <p class="step-desc" data-i18n="step4.desc">Tu pieza lista e instalada. Única, sostenible y hecha para
+                    durar toda la vida.</p>
             </div>
         </div>
     </section>
@@ -240,7 +251,8 @@
                 <div class="svc-accent"></div>
                 <div class="svc-num">01</div>
                 <h3 class="svc-name" data-i18n="svc1.name">Restauración</h3>
-                <p class="svc-desc" data-i18n="svc1.desc">Recuperamos piezas con valor histórico o sentimental. Cada restauración respeta la esencia original de la madera.</p>
+                <p class="svc-desc" data-i18n="svc1.desc">Recuperamos piezas con valor histórico o sentimental. Cada
+                    restauración respeta la esencia original de la madera.</p>
                 <div class="svc-items">
                     <span class="svc-item" data-i18n="svc1.i1">Muebles antiguos y de familia</span>
                     <span class="svc-item" data-i18n="svc1.i2">Técnicas artesanales y sostenibles</span>
@@ -251,7 +263,8 @@
                 <div class="svc-accent"></div>
                 <div class="svc-num">02</div>
                 <h3 class="svc-name" data-i18n="svc2.name">Fabricación a medida</h3>
-                <p class="svc-desc" data-i18n="svc2.desc">Desde el diseño hasta la colocación final. Muebles nuevos adaptados completamente a tu espacio y estilo de vida.</p>
+                <p class="svc-desc" data-i18n="svc2.desc">Desde el diseño hasta la colocación final. Muebles nuevos
+                    adaptados completamente a tu espacio y estilo de vida.</p>
                 <div class="svc-items">
                     <span class="svc-item" data-i18n="svc2.i1">Diseño colaborativo</span>
                     <span class="svc-item" data-i18n="svc2.i2">Fabricación completa en taller</span>
@@ -262,7 +275,8 @@
                 <div class="svc-accent"></div>
                 <div class="svc-num">03</div>
                 <h3 class="svc-name" data-i18n="svc3.name">Catálogo base</h3>
-                <p class="svc-desc" data-i18n="svc3.desc">Colección de piezas exclusivas disponibles. Cada una adaptable en medidas, materiales y acabados según tu gusto.</p>
+                <p class="svc-desc" data-i18n="svc3.desc">Colección de piezas exclusivas disponibles. Cada una adaptable
+                    en medidas, materiales y acabados según tu gusto.</p>
                 <div class="svc-items">
                     <span class="svc-item" data-i18n="svc3.i1">Piezas en stock disponibles</span>
                     <span class="svc-item" data-i18n="svc3.i2">Totalmente personalizables</span>
@@ -285,7 +299,8 @@
                     <line x1="22" y1="12" x2="22" y2="34" stroke="#4A2E12" stroke-width="1" />
                 </svg>
                 <div class="prd-name" data-i18n="prd1.name">Marcos decorativos</div>
-                <div class="prd-mat" data-i18n="prd1.mat">Madera de palet</div><span class="prd-tag" data-i18n="prd1.tag">A medida</span>
+                <div class="prd-mat" data-i18n="prd1.mat">Madera de palet</div><span class="prd-tag"
+                    data-i18n="prd1.tag">A medida</span>
             </div>
             <div class="product-card reveal"><svg class="prd-svg" viewBox="0 0 44 44" fill="none">
                     <rect x="6" y="24" width="32" height="5" rx="1" stroke="#4A2E12" stroke-width="1.5" />
@@ -294,14 +309,16 @@
                     <path d="M6 24 Q22 10 38 24" stroke="#4A2E12" stroke-width="1.5" fill="none" />
                 </svg>
                 <div class="prd-name" data-i18n="prd2.name">Mesas de comedor</div>
-                <div class="prd-mat" data-i18n="prd2.mat">Palet · Madera de poda</div><span class="prd-tag" data-i18n="prd2.tag">A medida</span>
+                <div class="prd-mat" data-i18n="prd2.mat">Palet · Madera de poda</div><span class="prd-tag"
+                    data-i18n="prd2.tag">A medida</span>
             </div>
             <div class="product-card reveal"><svg class="prd-svg" viewBox="0 0 44 44" fill="none">
                     <path d="M22 6 L28 18 L22 38 L16 18 Z" stroke="#4A2E12" stroke-width="1.5" fill="none" />
                     <circle cx="22" cy="38" r="2.5" stroke="#4A2E12" stroke-width="1.5" />
                 </svg>
                 <div class="prd-name" data-i18n="prd3.name">Lámparas</div>
-                <div class="prd-mat" data-i18n="prd3.mat">Ramas de olivo y viña</div><span class="prd-tag" data-i18n="prd3.tag">Exclusivas</span>
+                <div class="prd-mat" data-i18n="prd3.mat">Ramas de olivo y viña</div><span class="prd-tag"
+                    data-i18n="prd3.tag">Exclusivas</span>
             </div>
             <div class="product-card reveal"><svg class="prd-svg" viewBox="0 0 44 44" fill="none">
                     <rect x="8" y="8" width="28" height="32" rx="1" stroke="#4A2E12" stroke-width="1.5" />
@@ -309,7 +326,8 @@
                     <line x1="8" y1="28" x2="36" y2="28" stroke="#4A2E12" stroke-width="1" />
                 </svg>
                 <div class="prd-name" data-i18n="prd4.name">Bibliotecas infantiles</div>
-                <div class="prd-mat" data-i18n="prd4.mat">Listones de palet</div><span class="prd-tag" data-i18n="prd4.tag">A medida</span>
+                <div class="prd-mat" data-i18n="prd4.mat">Listones de palet</div><span class="prd-tag"
+                    data-i18n="prd4.tag">A medida</span>
             </div>
             <div class="product-card reveal"><svg class="prd-svg" viewBox="0 0 44 44" fill="none">
                     <rect x="8" y="18" width="28" height="18" rx="1" stroke="#4A2E12" stroke-width="1.5" />
@@ -318,7 +336,8 @@
                     <rect x="17" y="24" width="10" height="8" rx="0.5" stroke="#4A2E12" stroke-width="1" />
                 </svg>
                 <div class="prd-name" data-i18n="prd5.name">Tablas de corte</div>
-                <div class="prd-mat" data-i18n="prd5.mat">Madera de olivo</div><span class="prd-tag" data-i18n="prd5.tag">Decorativas</span>
+                <div class="prd-mat" data-i18n="prd5.mat">Madera de olivo</div><span class="prd-tag"
+                    data-i18n="prd5.tag">Decorativas</span>
             </div>
             <div class="product-card reveal"><svg class="prd-svg" viewBox="0 0 44 44" fill="none">
                     <rect x="10" y="18" width="24" height="16" rx="1" stroke="#4A2E12" stroke-width="1.5" />
@@ -327,7 +346,8 @@
                     <line x1="31" y1="34" x2="31" y2="40" stroke="#4A2E12" stroke-width="1.5" />
                 </svg>
                 <div class="prd-name" data-i18n="prd6.name">Mesitas de noche</div>
-                <div class="prd-mat" data-i18n="prd6.mat">Palet · Pino certificado</div><span class="prd-tag" data-i18n="prd6.tag">A medida</span>
+                <div class="prd-mat" data-i18n="prd6.mat">Palet · Pino certificado</div><span class="prd-tag"
+                    data-i18n="prd6.tag">A medida</span>
             </div>
             <div class="product-card reveal"><svg class="prd-svg" viewBox="0 0 44 44" fill="none">
                     <rect x="6" y="14" width="32" height="20" rx="1" stroke="#4A2E12" stroke-width="1.5" />
@@ -336,7 +356,8 @@
                     <path d="M16 24 L19 27 L28 20" stroke="#4A2E12" stroke-width="1.5" />
                 </svg>
                 <div class="prd-name" data-i18n="prd7.name">Rótulos</div>
-                <div class="prd-mat" data-i18n="prd7.mat">Pino · Madera reciclada</div><span class="prd-tag" data-i18n="prd7.tag">Personalizados</span>
+                <div class="prd-mat" data-i18n="prd7.mat">Pino · Madera reciclada</div><span class="prd-tag"
+                    data-i18n="prd7.tag">Personalizados</span>
             </div>
             <div class="product-card reveal"><svg class="prd-svg" viewBox="0 0 44 44" fill="none"><text x="9" y="30"
                         font-size="22" fill="none" stroke="#4A2E12" stroke-width="1.2" font-family="serif"
@@ -344,7 +365,8 @@
                     <path d="M30 14 Q36 22 30 30" stroke="#4A2E12" stroke-width="1.5" fill="none" />
                 </svg>
                 <div class="prd-name" data-i18n="prd8.name">Decoración personalizada</div>
-                <div class="prd-mat" data-i18n="prd8.mat">Nombres · Iniciales · Regalos</div><span class="prd-tag" data-i18n="prd8.tag">Único</span>
+                <div class="prd-mat" data-i18n="prd8.mat">Nombres · Iniciales · Regalos</div><span class="prd-tag"
+                    data-i18n="prd8.tag">Único</span>
             </div>
         </div>
     </section>
@@ -359,15 +381,22 @@
         </div>
         <div class="mat-content">
             <p class="eyebrow reveal" data-i18n="mat.eyebrow">Nuestros materiales</p>
-            <h2 class="section-title reveal"><span data-i18n="mat.title">La madera</span><br><span data-i18n="mat.title">tiene </span><em data-i18n="mat.title.em">historia</em></h2>
-            <p class="section-body reveal" data-i18n="mat.body">Trabajamos exclusivamente con maderas sostenibles y recicladas. Cada material
+            <h2 class="section-title reveal"><span data-i18n="mat.title">La madera</span><br><span
+                    data-i18n="mat.title">tiene </span><em data-i18n="mat.title.em">historia</em></h2>
+            <p class="section-body reveal" data-i18n="mat.body">Trabajamos exclusivamente con maderas sostenibles y
+                recicladas. Cada material
                 tiene su propio carácter y aporta autenticidad a cada pieza.</p>
             <div class="mat-list reveal">
-                <div class="mat-row"><span class="mat-row-name" data-i18n="mat.1">Madera de palet</span><span class="mat-row-tag" data-i18n="mat.1.tag">Reciclada</span></div>
-                <div class="mat-row"><span class="mat-row-name" data-i18n="mat.2">Ramas de olivo y viña</span><span class="mat-row-tag" data-i18n="mat.2.tag">Poda local</span></div>
-                <div class="mat-row"><span class="mat-row-name" data-i18n="mat.3">Madera de almendro</span><span class="mat-row-tag" data-i18n="mat.3.tag">Poda local</span></div>
-                <div class="mat-row"><span class="mat-row-name" data-i18n="mat.4">Madera de derribo</span><span class="mat-row-tag" data-i18n="mat.4.tag">Recuperada</span></div>
-                <div class="mat-row"><span class="mat-row-name" data-i18n="mat.5">Pino certificado FSC</span><span class="mat-row-tag" data-i18n="mat.5.tag">Sostenible</span></div>
+                <div class="mat-row"><span class="mat-row-name" data-i18n="mat.1">Madera de palet</span><span
+                        class="mat-row-tag" data-i18n="mat.1.tag">Reciclada</span></div>
+                <div class="mat-row"><span class="mat-row-name" data-i18n="mat.2">Ramas de olivo y viña</span><span
+                        class="mat-row-tag" data-i18n="mat.2.tag">Poda local</span></div>
+                <div class="mat-row"><span class="mat-row-name" data-i18n="mat.3">Madera de almendro</span><span
+                        class="mat-row-tag" data-i18n="mat.3.tag">Poda local</span></div>
+                <div class="mat-row"><span class="mat-row-name" data-i18n="mat.4">Madera de derribo</span><span
+                        class="mat-row-tag" data-i18n="mat.4.tag">Recuperada</span></div>
+                <div class="mat-row"><span class="mat-row-name" data-i18n="mat.5">Pino certificado FSC</span><span
+                        class="mat-row-tag" data-i18n="mat.5.tag">Sostenible</span></div>
             </div>
         </div>
     </section>
@@ -377,7 +406,8 @@
         <div class="sustain-inner">
             <div>
                 <p class="eyebrow reveal" data-i18n="sus.eyebrow">Compromiso</p>
-                <h2 class="section-title reveal"><span data-i18n="sus.title">Fustería con</span><br><em data-i18n="sus.title.em">conciencia</em></h2>
+                <h2 class="section-title reveal"><span data-i18n="sus.title">Fustería con</span><br><em
+                        data-i18n="sus.title.em">conciencia</em></h2>
             </div>
             <div class="sustain-grid">
                 <div class="sustain-card reveal"><svg class="sust-icon" viewBox="0 0 32 32" fill="none">
@@ -386,34 +416,40 @@
                         <circle cx="16" cy="16" r="4" stroke="#C8A46A" stroke-width="1.5" />
                     </svg>
                     <div class="sust-title" data-i18n="sus1.title">Materiales reciclados</div>
-                    <p class="sust-text" data-i18n="sus1.text">Palets, restes de poda y madera de derribos como materia prima. Cero compra de madera nueva cuando es posible.</p>
+                    <p class="sust-text" data-i18n="sus1.text">Palets, restes de poda y madera de derribos como materia
+                        prima. Cero compra de madera nueva cuando es posible.</p>
                 </div>
                 <div class="sustain-card reveal"><svg class="sust-icon" viewBox="0 0 32 32" fill="none">
                         <path d="M16 6v20M10 12l6-6 6 6" stroke="#C8A46A" stroke-width="1.5" />
                         <path d="M8 20q8 6 16 0" stroke="#4A5E38" stroke-width="1.5" fill="none" />
                     </svg>
                     <div class="sust-title" data-i18n="sus2.title">Cero residuos</div>
-                    <p class="sust-text" data-i18n="sus2.text">Los restos de madera se usan como energía térmica. El serrín se emplea como abono natural en huertos del entorno.</p>
+                    <p class="sust-text" data-i18n="sus2.text">Los restos de madera se usan como energía térmica. El
+                        serrín se emplea como abono natural en huertos del entorno.</p>
                 </div>
                 <div class="sustain-card reveal"><svg class="sust-icon" viewBox="0 0 32 32" fill="none">
                         <rect x="6" y="10" width="20" height="14" rx="1" stroke="#C8A46A" stroke-width="1.5" />
                         <path d="M11 10V8q0-3 5-3 5 0 5 3v2" stroke="#4A5E38" stroke-width="1.5" fill="none" />
                     </svg>
                     <div class="sust-title" data-i18n="sus3.title">Barnices ecológicos</div>
-                    <p class="sust-text" data-i18n="sus3.text">Exclusivamente barnices al agua y materiales de bajo impacto ambiental. Sin productos tóxicos, seguros para el hogar.</p>
+                    <p class="sust-text" data-i18n="sus3.text">Exclusivamente barnices al agua y materiales de bajo
+                        impacto ambiental. Sin productos tóxicos, seguros para el hogar.</p>
                 </div>
                 <div class="sustain-card reveal"><svg class="sust-icon" viewBox="0 0 32 32" fill="none">
                         <circle cx="16" cy="16" r="10" stroke="#C8A46A" stroke-width="1.5" />
                         <path d="M16 8v8l6 0" stroke="#4A5E38" stroke-width="1.5" />
                     </svg>
                     <div class="sust-title" data-i18n="sus4.title">Innovación constante</div>
-                    <p class="sust-text" data-i18n="sus4.text">Resina epoxi, integración de LEDs y nuevas técnicas de ensamblaje sostenible. Mejora y aprendizaje continuo.</p>
+                    <p class="sust-text" data-i18n="sus4.text">Resina epoxi, integración de LEDs y nuevas técnicas de
+                        ensamblaje sostenible. Mejora y aprendizaje continuo.</p>
                 </div>
                 <div class="ods-block reveal">
                     <div class="ods-num">ODS</div>
                     <div>
                         <div class="ods-lbl" data-i18n="ods.label">Objetivos de Desarrollo Sostenible</div>
-                        <p class="ods-text" data-i18n="ods.text">Pua Fusteria trabaja alineada con los ODS de Naciones Unidas: consumo responsable, producción sostenible y acción por el clima. Cada pieza es un acto de compromiso con el planeta.</p>
+                        <p class="ods-text" data-i18n="ods.text">Pua Fusteria trabaja alineada con los ODS de Naciones
+                            Unidas: consumo responsable, producción sostenible y acción por el clima. Cada pieza es un
+                            acto de compromiso con el planeta.</p>
                     </div>
                 </div>
             </div>
@@ -427,7 +463,7 @@
                 <p class="eyebrow reveal" data-i18n="gallery.eyebrow">Nuestro trabajo</p>
                 <h2 class="section-title reveal" data-i18n="gallery.title">Galería</h2>
             </div>
-            <a href="#" class="gallery-link reveal" data-i18n="gallery.link">Ver todos los trabajos →</a>
+            <a href="gallery.html" class="gallery-link reveal" data-i18n="gallery.link">Ver todos los trabajos →</a>
         </div>
         <div class="gallery-grid">
             <div class="gallery-cell reveal"><svg class="g-ph" viewBox="0 0 60 60" fill="none">
@@ -458,8 +494,10 @@
     <section class="contact" id="contact">
         <div>
             <p class="eyebrow reveal" data-i18n="contact.eyebrow">Contáctanos por WhatsApp</p>
-            <h2 class="section-title reveal"><span data-i18n="contact.title">¿Tienes una</span><br><strong data-i18n="contact.title.em">idea en mente?</strong></h2>
-            <p class="section-body reveal" style="margin-top:1.5rem" data-i18n="contact.body">Cuéntanos lo que necesitas y te responderemos lo antes posible.</p>
+            <h2 class="section-title reveal"><span data-i18n="contact.title">¿Tienes una</span><br><strong
+                    data-i18n="contact.title.em">idea en mente?</strong></h2>
+            <p class="section-body reveal" style="margin-top:1.5rem" data-i18n="contact.body">Cuéntanos lo que necesitas
+                y te responderemos lo antes posible.</p>
         </div>
         <div class="contact-right">
             <div class="c-details reveal">
@@ -493,7 +531,7 @@
                     </svg></div>
                 <div>
                     <div class="c-lbl">Email</div>
-                    <div class="c-val"><a href="mailto:alexnmcastello@gmail.com">alexnmcastello@gmail.com</a></div>
+                    <div class="c-val"><a href="mailto:puaproductes@gmail.com">puaproductes@gmail.com</a></div>
                 </div>
             </div>
             <div class="c-item">
@@ -545,9 +583,6 @@
                 d="M12 0C5.373 0 0 5.373 0 12c0 2.124.558 4.118 1.532 5.845L.057 23.547a.5.5 0 00.609.609l5.702-1.475A11.943 11.943 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.006-1.374l-.36-.214-3.732.979.995-3.63-.234-.373A9.818 9.818 0 1112 21.818z" />
         </svg>
     </a>
-    </div>
-    </div>
-    </section>
     <!-- FOOTER -->
     <footer>
         <div class="f-logo">Pua / Fusteria</div>
@@ -557,7 +592,6 @@
                 style="color:rgba(248,243,235,.2);text-decoration:none">@puafusteria</a></div>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/main.js"></script>
     <script src="js/contact.js"></script>
 </body>

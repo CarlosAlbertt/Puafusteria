@@ -1,0 +1,1206 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galería de trabajos — Pua Fusteria</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Jost:wght@300;400;500&display=swap"
+        rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/main.css">
+    <style>
+        :root {
+            --cream: #F8F3EB;
+            --warm: #EEE4D0;
+            --bark: #4A2E12;
+            --bark-md: #7A5230;
+            --bark-lt: #A67C52;
+            --sand: #C8A46A;
+            --sand-lt: #E2C89A;
+            --moss: #2E3D22;
+            --char: #1A120A;
+            --gray: #8A7A6A;
+            --grain: #EFE6D5;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Jost', sans-serif;
+            background: var(--cream);
+            color: var(--char);
+            overflow-x: hidden;
+            cursor: none;
+        }
+
+        /* CURSOR */
+        .cursor {
+            width: 10px;
+            height: 10px;
+            background: var(--sand);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: transform .15s, background .15s;
+        }
+
+        .cursor-ring {
+            width: 36px;
+            height: 36px;
+            border: 1px solid var(--sand);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9998;
+            transform: translate(-50%, -50%);
+            opacity: .6;
+            transition: width .3s, height .3s;
+        }
+
+        body.hovering .cursor {
+            transform: translate(-50%, -50%) scale(2.5);
+            background: var(--bark);
+        }
+
+        body.hovering .cursor-ring {
+            width: 60px;
+            height: 60px;
+            opacity: .25;
+        }
+
+        /* GRAIN */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 9997;
+        }
+
+        /* NAV */
+        #nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.6rem 4rem;
+            transition: padding .4s, background .4s, border-color .4s;
+            border-bottom: 1px solid transparent;
+            background: none;
+        }
+
+        #nav.scrolled {
+            background: rgba(248, 243, 235, .96);
+            backdrop-filter: blur(12px);
+            padding: 1rem 4rem;
+            border-bottom-color: rgba(74, 46, 18, .1);
+        }
+
+        .nav-logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--cream);
+            letter-spacing: .06em;
+            text-decoration: none;
+        }
+
+        #nav.scrolled .nav-logo {
+            color: var(--bark);
+        }
+
+        .nav-logo-sep {
+            color: var(--sand);
+            font-weight: 300;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+            /* Cancelar el position:fixed que aplica main.css en desktop */
+            position: static !important;
+            transform: none !important;
+            height: auto !important;
+            left: auto !important;
+            top: auto !important;
+            z-index: auto !important;
+            background: none !important;
+        }
+
+        .nav-links a {
+            font-size: .75rem;
+            font-weight: 400;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+            color: rgba(248, 243, 235, .65);
+            text-decoration: none;
+            transition: color .2s, opacity .2s;
+            position: relative;
+        }
+
+        #nav.scrolled .nav-links a {
+            color: var(--char);
+            opacity: .55;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--sand);
+            transition: width .3s;
+        }
+
+        .nav-links a:hover { color: var(--cream); opacity: 1; }
+        #nav.scrolled .nav-links a:hover { color: var(--char); opacity: 1; }
+        .nav-links a:hover::after { width: 100%; }
+        .nav-links a.active { color: var(--cream); opacity: 1; }
+        #nav.scrolled .nav-links a.active { color: var(--char); opacity: 1; }
+        .nav-links a.active::after { width: 100%; }
+
+        .nav-cta {
+            background: var(--bark);
+            color: var(--cream) !important;
+            padding: .6rem 1.4rem;
+        }
+
+        .nav-cta:hover { background: var(--bark-md) !important; }
+        .nav-cta::after { display: none !important; }
+
+        /* HERO GALERÍA */
+        .gallery-hero {
+            min-height: 38vh;
+            background: var(--bark);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 8rem 4rem 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gallery-hero-bg {
+            position: absolute;
+            top: -80px;
+            right: -80px;
+            width: 500px;
+            height: 500px;
+            opacity: .04;
+        }
+
+        .gallery-hero-num {
+            position: absolute;
+            top: 6rem;
+            right: 4rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 10rem;
+            font-weight: 300;
+            color: rgba(248, 243, 235, .04);
+            line-height: 1;
+            user-select: none;
+        }
+
+        .gallery-hero-tag {
+            font-size: .7rem;
+            letter-spacing: .22em;
+            text-transform: uppercase;
+            color: var(--sand);
+            margin-bottom: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            opacity: 0;
+            animation: fadeUp .8s .3s forwards;
+        }
+
+        .gallery-hero-tag::before {
+            content: '';
+            width: 30px;
+            height: 1px;
+            background: var(--sand);
+        }
+
+        .gallery-hero-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(3rem, 5vw, 5rem);
+            font-weight: 300;
+            color: var(--cream);
+            line-height: 1.05;
+            opacity: 0;
+            animation: fadeUp .9s .5s forwards;
+        }
+
+        .gallery-hero-title strong {
+            font-weight: 600;
+        }
+
+        .gallery-hero-count {
+            position: absolute;
+            bottom: 4rem;
+            right: 4rem;
+            text-align: right;
+            opacity: 0;
+            animation: fadeIn 1s 1s forwards;
+        }
+
+        .gallery-hero-count-num {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3rem;
+            font-weight: 600;
+            color: var(--sand);
+            line-height: 1;
+        }
+
+        .gallery-hero-count-label {
+            font-size: .62rem;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+            color: rgba(248, 243, 235, .3);
+            margin-top: .2rem;
+        }
+
+        /* FILTROS */
+        .filters {
+            background: var(--grain);
+            padding: 2rem 4rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            border-bottom: 1px solid rgba(74, 46, 18, .1);
+        }
+
+        .filter-label {
+            font-size: .65rem;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+            color: var(--bark-lt);
+            margin-right: .5rem;
+        }
+
+        .filter-btn {
+            font-size: .7rem;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            font-weight: 400;
+            color: var(--char);
+            opacity: .5;
+            background: none;
+            border: 1px solid transparent;
+            padding: .4rem 1.1rem;
+            cursor: pointer;
+            transition: all .2s;
+            font-family: 'Jost', sans-serif;
+        }
+
+        .filter-btn:hover {
+            opacity: .9;
+            border-color: rgba(74, 46, 18, .2);
+        }
+
+        .filter-btn.active {
+            opacity: 1;
+            border-color: var(--sand);
+            color: var(--bark);
+            background: rgba(200, 164, 106, .08);
+        }
+
+        /* GRID GALERÍA */
+        .gallery-section {
+            padding: 4rem;
+            background: var(--cream);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-auto-rows: 260px;
+            gap: 6px;
+        }
+
+        /* Tamaños especiales para el grid mixto */
+        .cell-wide {
+            grid-column: span 2;
+        }
+
+        .cell-tall {
+            grid-row: span 2;
+        }
+
+        .cell-big {
+            grid-column: span 2;
+            grid-row: span 2;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            background: var(--warm);
+            cursor: pointer;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform .6s ease;
+            display: block;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.06);
+        }
+
+        /* Overlay al hover */
+        .gallery-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(74, 46, 18, 0);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 1.5rem;
+            transition: background .4s;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            background: rgba(74, 46, 18, .55);
+        }
+
+        .gallery-overlay-content {
+            transform: translateY(12px);
+            opacity: 0;
+            transition: transform .35s, opacity .35s;
+        }
+
+        .gallery-item:hover .gallery-overlay-content {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .overlay-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--cream);
+            margin-bottom: .25rem;
+        }
+
+        .overlay-mat {
+            font-size: .65rem;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: var(--sand-lt);
+        }
+
+        .overlay-icon {
+            position: absolute;
+            top: 1.2rem;
+            right: 1.2rem;
+            width: 36px;
+            height: 36px;
+            border: 1px solid rgba(248, 243, 235, .4);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity .35s;
+        }
+
+        .gallery-item:hover .overlay-icon {
+            opacity: 1;
+        }
+
+        /* Placeholder cuando no hay imagen */
+        .gallery-placeholder-inner {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: .8rem;
+            background: var(--warm);
+        }
+
+        .gallery-placeholder-inner svg {
+            opacity: .15;
+        }
+
+        .gallery-placeholder-inner span {
+            font-size: .65rem;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+            color: var(--bark-lt);
+        }
+
+        /* LIGHTBOX */
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            z-index: 1000;
+            background: rgba(26, 18, 10, .96);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity .35s;
+        }
+
+        .lightbox.open {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .lightbox-img-wrap {
+            position: relative;
+            max-width: 85vw;
+            max-height: 85vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox-img {
+            max-width: 85vw;
+            max-height: 82vh;
+            object-fit: contain;
+            transform: scale(.95);
+            transition: transform .35s;
+        }
+
+        .lightbox.open .lightbox-img {
+            transform: scale(1);
+        }
+
+        .lightbox-info {
+            position: absolute;
+            bottom: -3rem;
+            left: 0;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .lightbox-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--cream);
+        }
+
+        .lightbox-mat {
+            font-size: .65rem;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: var(--sand);
+            opacity: .7;
+        }
+
+        /* Controles lightbox */
+        .lb-close {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            width: 44px;
+            height: 44px;
+            border: 1px solid rgba(248, 243, 235, .2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            background: none;
+            transition: border-color .2s, background .2s;
+        }
+
+        .lb-close:hover {
+            border-color: var(--sand);
+            background: rgba(200, 164, 106, .1);
+        }
+
+        .lb-close svg {
+            width: 16px;
+            stroke: rgba(248, 243, 235, .7);
+        }
+
+        .lb-prev,
+        .lb-next {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 48px;
+            height: 48px;
+            border: 1px solid rgba(248, 243, 235, .15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            background: none;
+            transition: border-color .2s, background .2s;
+        }
+
+        .lb-prev {
+            left: 2rem;
+        }
+
+        .lb-next {
+            right: 2rem;
+        }
+
+        .lb-prev:hover,
+        .lb-next:hover {
+            border-color: var(--sand);
+            background: rgba(200, 164, 106, .1);
+        }
+
+        .lb-prev svg,
+        .lb-next svg {
+            width: 18px;
+            stroke: rgba(248, 243, 235, .6);
+        }
+
+        .lb-counter {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: .65rem;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: rgba(248, 243, 235, .3);
+        }
+
+        /* BACK LINK */
+        .back-section {
+            background: var(--bark);
+            padding: 3rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .back-link {
+            font-size: .72rem;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+            color: rgba(248, 243, 235, .5);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: .8rem;
+            transition: color .2s;
+        }
+
+        .back-link:hover {
+            color: var(--sand);
+        }
+
+        .back-link svg {
+            width: 14px;
+            stroke: currentColor;
+        }
+
+        .back-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            font-style: italic;
+            color: rgba(248, 243, 235, .3);
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--char);
+            padding: 2.5rem 4rem;
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .f-logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: rgba(248, 243, 235, .5);
+        }
+
+        .f-center {
+            text-align: center;
+            font-size: .65rem;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: rgba(248, 243, 235, .18);
+            line-height: 1.9;
+        }
+
+        .f-right {
+            text-align: right;
+            font-size: .7rem;
+            color: rgba(248, 243, 235, .22);
+        }
+
+        /* ANIMACIONES */
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(24px)
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0)
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0
+            }
+
+            to {
+                opacity: 1
+            }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity .8s ease, transform .8s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 900px) {
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+                grid-auto-rows: 220px;
+            }
+
+            .cell-big {
+                grid-column: span 2;
+                grid-row: span 1;
+            }
+
+            .cell-wide {
+                grid-column: span 2;
+            }
+
+            .cell-tall {
+                grid-row: span 1;
+            }
+
+            #nav {
+                padding: 1rem 1.5rem;
+            }
+
+            .gallery-hero {
+                padding: 7rem 1.5rem 3rem;
+            }
+
+            .gallery-section {
+                padding: 2rem 1.5rem;
+            }
+
+            .filters {
+                padding: 1.5rem;
+                flex-wrap: wrap;
+            }
+        }
+
+        @media (max-width: 560px) {
+            .gallery-grid {
+                grid-template-columns: 1fr;
+                grid-auto-rows: 280px;
+            }
+
+            .cell-big,
+            .cell-wide,
+            .cell-tall {
+                grid-column: span 1;
+                grid-row: span 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-ring" id="cursorRing"></div>
+
+    <!-- NAV -->
+    <nav id="nav">
+        <a class="nav-logo" href="index.html">Pua <span class="nav-logo-sep">/</span> Fusteria</a>
+        <ul class="nav-links">
+            <li><a href="index.html#about">Nosotros</a></li>
+            <li><a href="index.html#services">Servicios</a></li>
+            <li><a href="galeria.html" class="active">Galería</a></li>
+            <li><a href="index.html#contact" class="nav-cta">Presupuesto</a></li>
+        </ul>
+    </nav>
+
+    <!-- HERO -->
+    <section class="gallery-hero">
+        <svg class="gallery-hero-bg" viewBox="0 0 500 500" fill="none">
+            <circle cx="250" cy="250" r="240" stroke="#F8F3EB" stroke-width="1" />
+            <circle cx="250" cy="250" r="195" stroke="#F8F3EB" stroke-width="1.5" />
+            <circle cx="250" cy="250" r="150" stroke="#F8F3EB" stroke-width="1" />
+            <circle cx="250" cy="250" r="108" stroke="#F8F3EB" stroke-width="1.5" />
+            <circle cx="250" cy="250" r="68" stroke="#F8F3EB" stroke-width="1" />
+            <circle cx="250" cy="250" r="32" stroke="#F8F3EB" stroke-width="1.5" />
+        </svg>
+        <div class="gallery-hero-num">02</div>
+        <p class="gallery-hero-tag">Trabajos realizados · Piezas únicas</p>
+        <h1 class="gallery-hero-title">Galería de<br><strong>trabajos</strong></h1>
+        <div class="gallery-hero-count">
+            <div class="gallery-hero-count-num">16</div>
+            <div class="gallery-hero-count-label">Piezas mostradas</div>
+        </div>
+    </section>
+
+    <!-- FILTROS -->
+    <div class="filters">
+        <span class="filter-label">Filtrar por</span>
+        <button class="filter-btn active" data-filter="all">Todos</button>
+        <button class="filter-btn" data-filter="mesas">Mesas</button>
+        <button class="filter-btn" data-filter="lamparas">Lámparas</button>
+        <button class="filter-btn" data-filter="marcos">Marcos</button>
+        <button class="filter-btn" data-filter="restauracion">Restauración</button>
+        <button class="filter-btn" data-filter="decoracion">Decoración</button>
+    </div>
+
+    <!-- GRID -->
+    <section class="gallery-section">
+        <div class="gallery-grid" id="galleryGrid">
+
+            <!--
+      INSTRUCCIONES PARA AÑADIR FOTOS:
+      1. Pon tus fotos optimizadas en public/img/gallery/
+      2. Sustituye cada src="img/gallery/foto-XX.webp" por el nombre real de tu archivo
+      3. Cambia el data-name y data-mat con el nombre y material de cada pieza
+      4. Ajusta las clases de tamaño: cell-big, cell-wide, cell-tall, o ninguna (normal)
+         - cell-big  → ocupa 2 columnas y 2 filas (para la foto más impactante)
+         - cell-wide → ocupa 2 columnas (fotos apaisadas)
+         - cell-tall → ocupa 2 filas (fotos verticales)
+         - (sin clase) → tamaño normal 1x1
+    -->
+
+            <div class="gallery-item cell-big reveal" data-category="mesas" data-name="Mesa de comedor"
+                data-mat="Madera de olivo">
+                <img src="img/gallery/foto-01.webp" alt="Mesa de comedor en madera de olivo" loading="lazy">
+                <div class="gallery-overlay">
+                    <div class="overlay-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5">
+                            <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                        </svg></div>
+                    <div class="gallery-overlay-content">
+                        <div class="overlay-name">Mesa de comedor</div>
+                        <div class="overlay-mat">Madera de olivo</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="gallery-item reveal" data-category="marcos" data-name="Marco decorativo"
+                data-mat="Madera de palet">
+                <img src="img/gallery/foto-02.webp" alt="Marco decorativo en palet" loading="lazy">
+                <div class="gallery-overlay">
+                    <div class="overlay-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5">
+                            <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                        </svg></div>
+                    <div class="gallery-overlay-content">
+                        <div class="overlay-name">Marco decorativo</div>
+                        <div class="overlay-mat">Madera de palet</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="gallery-item reveal" data-category="lamparas" data-name="Lámpara de techo"
+                data-mat="Ramas de viña">
+                <img src="img/gallery/foto-03.webp" alt="Lámpara de ramas de viña" loading="lazy">
+                <div class="gallery-overlay">
+                    <div class="overlay-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5">
+                            <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                        </svg></div>
+                    <div class="gallery-overlay-content">
+                        <div class="overlay-name">Lámpara de techo</div>
+                        <div class="overlay-mat">Ramas de viña</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="gallery-item cell-wide reveal" data-category="mesas" data-name="Mesa de centro"
+                data-mat="Listones de palet">
+                <img src="img/gallery/foto-04.webp" alt="Mesa de centro en palet" loading="lazy">
+                <div class="gallery-overlay">
+                    <div class="overlay-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5">
+                            <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                        </svg></div>
+                    <div class="gallery-overlay-content">
+                        <div class="overlay-name">Mesa de centro</div>
+                        <div class="overlay-mat">Listones de palet</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="gallery-item cell-tall reveal" data-category="decoracion" data-name="Rótulo personalizado"
+                data-mat="Pino y madera reciclada">
+                <img src="img/gallery/foto-05.webp" alt="Rótulo personalizado" loading="lazy">
+                <div class="gallery-overlay">
+                    <div class="overlay-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5">
+                            <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                        </svg></div>
+                    <div class="gallery-overlay-content">
+                        <div class="overlay-name">Rótulo personalizado</div>
+                        <div class="overlay-mat">Pino y madera reciclada</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="gallery-item reveal" data-category="restauracion" data-name="Silla restaurada"
+                data-mat="Roble recuperado">
+                <img src="img/gallery/foto-06.webp" alt="Silla restaurada en roble" loading="lazy">
+                <div class="gallery-overlay">
+                    <div class="overlay-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5">
+                            <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                        </svg></div>
+                    <div class="gallery-overlay-content">
+                        <div class="overlay-name">Silla restaurada</div>
+                        <div class="overlay-mat">Roble recuperado</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="gallery-item reveal" data-category="marcos" data-name="Marco bastidor"
+                data-mat="Madera de palet">
+                <img src="img/gallery/foto-07.webp" alt="Marco bastidor" loading="lazy">
+                <div class="gallery-overlay">
+                    <div class="overlay-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5">
+                            <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                        </svg></div>
+                    <div class="gallery-overlay-content">
+                        <div class="overlay-name">Marco bastidor</div>
+                        <div class="overlay-mat">Madera de palet</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="gallery-item cell-wide reveal" data-category="restauracion" data-name="Aparador restaurado"
+                data-mat="Madera de derribo">
+                <img src="img/gallery/foto-08.webp" alt="Aparador restaurado" loading="lazy">
+                <div class="gallery-overlay">
+                    <div class="overlay-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5">
+                            <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                        </svg></div>
+                    <div class="gallery-overlay-content">
+                        <div class="overlay-name">Aparador restaurado</div>
+                        <div class="overlay-mat">Madera de derribo</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="gallery-item reveal" data-category="lamparas" data-name="Lámpara de pie"
+                data-mat="Ramas de olivo">
+                <img src="img/gallery/foto-09.webp" alt="Lámpara de pie en olivo" loading="lazy">
+                <div class="gallery-overlay">
+                    <div class="overlay-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5">
+                            <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                        </svg></div>
+                    <div class="gallery-overlay-content">
+                        <div class="overlay-name">Lámpara de pie</div>
+                        <div class="overlay-mat">Ramas de olivo</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="gallery-item reveal" data-category="decoracion" data-name="Tabla de corte"
+                data-mat="Madera de olivo">
+                <img src="img/gallery/foto-10.webp" alt="Tabla de corte en olivo" loading="lazy">
+                <div class="gallery-overlay">
+                    <div class="overlay-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5">
+                            <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                        </svg></div>
+                    <div class="gallery-overlay-content">
+                        <div class="overlay-name">Tabla de corte</div>
+                        <div class="overlay-mat">Madera de olivo</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="gallery-item cell-tall reveal" data-category="mesas" data-name="Mesita de noche"
+                data-mat="Palet y pino">
+                <img src="img/gallery/foto-11.webp" alt="Mesita de noche" loading="lazy">
+                <div class="gallery-overlay">
+                    <div class="overlay-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5">
+                            <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                        </svg></div>
+                    <div class="gallery-overlay-content">
+                        <div class="overlay-name">Mesita de noche</div>
+                        <div class="overlay-mat">Palet y pino</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="gallery-item reveal" data-category="decoracion" data-name="Decoración inicial"
+                data-mat="Madera reciclada">
+                <img src="img/gallery/foto-12.webp" alt="Decoración con iniciales" loading="lazy">
+                <div class="gallery-overlay">
+                    <div class="overlay-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5">
+                            <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                        </svg></div>
+                    <div class="gallery-overlay-content">
+                        <div class="overlay-name">Decoración inicial</div>
+                        <div class="overlay-mat">Madera reciclada</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="gallery-item cell-wide reveal" data-category="mesas" data-name="Mesa con resina epoxi"
+                data-mat="Poda y resina">
+                <img src="img/gallery/foto-13.webp" alt="Mesa con resina epoxi" loading="lazy">
+                <div class="gallery-overlay">
+                    <div class="overlay-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5">
+                            <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                        </svg></div>
+                    <div class="gallery-overlay-content">
+                        <div class="overlay-name">Mesa con resina epoxi</div>
+                        <div class="overlay-mat">Poda y resina</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="gallery-item reveal" data-category="marcos" data-name="Marco con LED"
+                data-mat="Palet y tira LED">
+                <img src="img/gallery/foto-14.webp" alt="Marco con iluminación LED" loading="lazy">
+                <div class="gallery-overlay">
+                    <div class="overlay-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5">
+                            <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                        </svg></div>
+                    <div class="gallery-overlay-content">
+                        <div class="overlay-name">Marco con LED</div>
+                        <div class="overlay-mat">Palet y tira LED</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="gallery-item reveal" data-category="restauracion" data-name="Cómoda restaurada"
+                data-mat="Madera recuperada">
+                <img src="img/gallery/foto-15.webp" alt="Cómoda restaurada" loading="lazy">
+                <div class="gallery-overlay">
+                    <div class="overlay-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5">
+                            <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                        </svg></div>
+                    <div class="gallery-overlay-content">
+                        <div class="overlay-name">Cómoda restaurada</div>
+                        <div class="overlay-mat">Madera recuperada</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="gallery-item reveal" data-category="lamparas" data-name="Lámpara de almendro"
+                data-mat="Ramas de almendro">
+                <img src="img/gallery/foto-16.webp" alt="Lámpara de almendro" loading="lazy">
+                <div class="gallery-overlay">
+                    <div class="overlay-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5">
+                            <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                        </svg></div>
+                    <div class="gallery-overlay-content">
+                        <div class="overlay-name">Lámpara de almendro</div>
+                        <div class="overlay-mat">Ramas de almendro</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- BACK -->
+    <div class="back-section">
+        <a href="index.html" class="back-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5">
+                <line x1="19" y1="12" x2="5" y2="12" />
+                <polyline points="12,5 5,12 12,19" />
+            </svg>
+            Volver al inicio
+        </a>
+        <span class="back-text">Cada pieza, una historia</span>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="f-logo">Pua / Fusteria</div>
+        <div class="f-center">Carrer Remur, 51 · Benlloc, Castellón<br>© 2025 Pua Fusteria · Todos los derechos
+            reservados</div>
+        <div class="f-right"><a href="https://www.instagram.com/puafusteria/" target="_blank"
+                style="color:rgba(248,243,235,.22);text-decoration:none">@puafusteria</a></div>
+    </footer>
+
+    <!-- LIGHTBOX -->
+    <div class="lightbox" id="lightbox">
+        <button class="lb-close" id="lbClose"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5">
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+            </svg></button>
+        <button class="lb-prev" id="lbPrev"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5">
+                <line x1="19" y1="12" x2="5" y2="12" />
+                <polyline points="12,5 5,12 12,19" />
+            </svg></button>
+        <button class="lb-next" id="lbNext"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5">
+                <line x1="5" y1="12" x2="19" y2="12" />
+                <polyline points="12,19 19,12 12,5" />
+            </svg></button>
+        <div class="lightbox-img-wrap">
+            <img class="lightbox-img" id="lbImg" src="" alt="">
+            <div class="lightbox-info">
+                <span class="lightbox-name" id="lbName"></span>
+                <span class="lightbox-mat" id="lbMat"></span>
+            </div>
+        </div>
+        <div class="lb-counter" id="lbCounter"></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // ── Cursor ────────────────────────────────────────────────
+        const cur = document.getElementById('cursor');
+        const ring = document.getElementById('cursorRing');
+        let mx = 0, my = 0, rx = 0, ry = 0;
+        document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY });
+        (function a() { rx += (mx - rx) * .12; ry += (my - ry) * .12; cur.style.left = mx + 'px'; cur.style.top = my + 'px'; ring.style.left = rx + 'px'; ring.style.top = ry + 'px'; requestAnimationFrame(a) })();
+        document.querySelectorAll('a,button,.gallery-item,.filter-btn').forEach(el => {
+            el.addEventListener('mouseenter', () => document.body.classList.add('hovering'));
+            el.addEventListener('mouseleave', () => document.body.classList.remove('hovering'));
+        });
+
+        // ── Nav scroll ────────────────────────────────────────────
+        const nav = document.getElementById('nav');
+        window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 60));
+
+        // ── Reveal ────────────────────────────────────────────────
+        const obs = new IntersectionObserver((entries) => {
+            entries.forEach((e, i) => {
+                if (e.isIntersecting) { setTimeout(() => e.target.classList.add('visible'), i * 60); obs.unobserve(e.target); }
+            });
+        }, { threshold: .08 });
+        document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+        // ── Filtros ───────────────────────────────────────────────
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const items = document.querySelectorAll('.gallery-item');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                const filter = btn.dataset.filter;
+                items.forEach(item => {
+                    const match = filter === 'all' || item.dataset.category === filter;
+                    item.style.display = match ? '' : 'none';
+                });
+            });
+        });
+
+        // ── Lightbox ──────────────────────────────────────────────
+        const lightbox = document.getElementById('lightbox');
+        const lbImg = document.getElementById('lbImg');
+        const lbName = document.getElementById('lbName');
+        const lbMat = document.getElementById('lbMat');
+        const lbCounter = document.getElementById('lbCounter');
+
+        let visibleItems = [];
+        let currentIndex = 0;
+
+        function getVisible() {
+            return [...document.querySelectorAll('.gallery-item')]
+                .filter(el => el.style.display !== 'none');
+        }
+
+        function openLightbox(index) {
+            visibleItems = getVisible();
+            currentIndex = index;
+            updateLightbox();
+            lightbox.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            lightbox.classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        function updateLightbox() {
+            const item = visibleItems[currentIndex];
+            const img = item.querySelector('img');
+            lbImg.src = img.src;
+            lbImg.alt = img.alt;
+            lbName.textContent = item.dataset.name;
+            lbMat.textContent = item.dataset.mat;
+            lbCounter.textContent = `${currentIndex + 1} / ${visibleItems.length}`;
+        }
+
+        items.forEach(item => {
+            item.addEventListener('click', () => {
+                visibleItems = getVisible();
+                const idx = visibleItems.indexOf(item);
+                openLightbox(idx);
+            });
+        });
+
+        document.getElementById('lbClose').addEventListener('click', closeLightbox);
+
+        document.getElementById('lbPrev').addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + visibleItems.length) % visibleItems.length;
+            updateLightbox();
+        });
+
+        document.getElementById('lbNext').addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % visibleItems.length;
+            updateLightbox();
+        });
+
+        // Cerrar con Escape, navegar con flechas del teclado
+        document.addEventListener('keydown', e => {
+            if (!lightbox.classList.contains('open')) return;
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowLeft') { currentIndex = (currentIndex - 1 + visibleItems.length) % visibleItems.length; updateLightbox(); }
+            if (e.key === 'ArrowRight') { currentIndex = (currentIndex + 1) % visibleItems.length; updateLightbox(); }
+        });
+
+        // Cerrar al hacer clic fuera de la imagen
+        lightbox.addEventListener('click', e => {
+            if (e.target === lightbox) closeLightbox();
+        });
+    </script>
+</body>
+
+</html>
