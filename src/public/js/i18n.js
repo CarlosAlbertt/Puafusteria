@@ -93,7 +93,8 @@ const TRANSLATIONS = {
         // MATERIALS
         "mat.eyebrow": "Nuestros materiales",
         "mat.title": "La madera",
-        "mat.title.em": "tiene historia",
+        "mat.title2": "tiene ",
+        "mat.title.em": "historia",
         "mat.body": "Trabajamos exclusivamente con maderas sostenibles y recicladas. Cada material tiene su propio carácter y aporta autenticidad a cada pieza.",
         "mat.1": "Madera de palet",
         "mat.1.tag": "Reciclada",
@@ -138,6 +139,30 @@ const TRANSLATIONS = {
         "contact.btn.wa": "Escríbenos por WhatsApp",
         "contact.btn.ig": "Síguenos en Instagram",
         "wa.tooltip": "¿Hablamos?",
+
+        // MARQUEE
+        "marquee.1": "Piezas Únicas Artesanas",
+        "marquee.2": "Madera Reciclada",
+        "marquee.3": "Diseño Personalizado",
+        "marquee.4": "Fabricación Artesanal",
+        "marquee.5": "Compromiso Ecológico",
+
+        // MATERIAL BLOCKS
+        "matblock.1": "Palet reciclado",
+        "matblock.2": "Madera de poda",
+        "matblock.3": "Madera de derribo",
+        "matblock.4": "Pino certificado",
+
+        // GALLERY LABELS
+        "glbl.1": "Interiorismo restaurante",
+        "glbl.2": "Mesa de comedor",
+        "glbl.3": "Marco de fotos",
+        "glbl.4": "Estantería LED",
+        "glbl.5": "Rótulo personalizado",
+
+        // FOOTER
+        "footer.rights": "Todos los derechos reservados",
+        "footer.tagline": "Piezas Únicas Artesanas",
     },
 
     val: {
@@ -233,7 +258,8 @@ const TRANSLATIONS = {
         // MATERIALS
         "mat.eyebrow": "Els nostres materials",
         "mat.title": "La fusta",
-        "mat.title.em": "té història",
+        "mat.title2": "té ",
+        "mat.title.em": "història",
         "mat.body": "Treballem exclusivament amb fustes sostenibles i reciclades. Cada material té el seu propi caràcter i aporta autenticitat a cada peça.",
         "mat.1": "Fusta de palet",
         "mat.1.tag": "Reciclada",
@@ -278,6 +304,30 @@ const TRANSLATIONS = {
         "contact.btn.wa": "Escriu-nos per WhatsApp",
         "contact.btn.ig": "Segueix-nos a Instagram",
         "wa.tooltip": "Parlem?",
+
+        // MARQUEE
+        "marquee.1": "Peces Úniques Artesanes",
+        "marquee.2": "Fusta Reciclada",
+        "marquee.3": "Disseny Personalitzat",
+        "marquee.4": "Fabricació Artesanal",
+        "marquee.5": "Compromís Ecològic",
+
+        // MATERIAL BLOCKS
+        "matblock.1": "Palet reciclat",
+        "matblock.2": "Fusta de poda",
+        "matblock.3": "Fusta de derroc",
+        "matblock.4": "Pi certificat",
+
+        // GALLERY LABELS
+        "glbl.1": "Interiorisme restaurant",
+        "glbl.2": "Taula de menjador",
+        "glbl.3": "Marc de fotos",
+        "glbl.4": "Prestatgeria LED",
+        "glbl.5": "Rètol personalitzat",
+
+        // FOOTER
+        "footer.rights": "Tots els drets reservats",
+        "footer.tagline": "Peces Úniques Artesanes",
     }
 };
 
@@ -303,7 +353,7 @@ function applyLang(lang) {
 
 // ── Init ──────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
-    const saved = localStorage.getItem('pua-lang') || 'es';
+    const saved = localStorage.getItem('pua-lang') || 'val';
     applyLang(saved);
 
     document.querySelectorAll('.lang-btn').forEach(btn => {

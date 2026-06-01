@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="ca">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Galería de trabajos — Pua Fusteria</title>
+    <title>Galeria de treballs — Pua Fusteria</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link
         href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Jost:wght@300;400;500&display=swap"
         rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/animation.css">
     <link rel="stylesheet" href="css/main.css">
     <style>
         :root {
@@ -340,6 +340,7 @@
             grid-template-columns: repeat(4, 1fr);
             grid-auto-rows: 260px;
             gap: 6px;
+            grid-auto-flow: dense;
         }
 
         /* Tamaños especiales para el grid mixto */
@@ -763,11 +764,28 @@
     <nav id="nav">
         <a class="nav-logo" href="index.html">Pua <span class="nav-logo-sep">/</span> Fusteria</a>
         <ul class="nav-links">
-            <li><a href="index.html#about">Nosotros</a></li>
-            <li><a href="index.html#services">Servicios</a></li>
-            <li><a href="galeria.html" class="active">Galería</a></li>
-            <li><a href="index.html#contact" class="nav-cta">Presupuesto</a></li>
+            <li><a href="index.html#about">Nosaltres</a></li>
+            <li><a href="index.html#services">Serveis</a></li>
+            <li><a href="gallery.html" class="active">Galeria</a></li>
+            <li><a href="index.html#contact" class="nav-cta">Pressupost</a></li>
         </ul>
+        <div class="lang-switcher" style="display:flex;gap:.5rem;margin-left:1rem">
+            <button class="lang-btn" data-lang="es" style="display:flex;align-items:center;gap:.3rem;background:none;border:1px solid rgba(248,243,235,.2);padding:.3rem .7rem;color:rgba(248,243,235,.65);font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;font-family:'Jost',sans-serif;cursor:pointer;transition:all .2s">
+                <img src="https://flagcdn.com/es.svg" alt="Español" style="width:16px;height:11px"> ES
+            </button>
+            <button class="lang-btn active" data-lang="val" style="display:flex;align-items:center;gap:.3rem;background:none;border:1px solid var(--sand);padding:.3rem .7rem;color:var(--cream);font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;font-family:'Jost',sans-serif;cursor:pointer;transition:all .2s">
+                <svg viewBox="0 0 24 16" style="width:16px;height:11px" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="24" height="2" y="0" fill="#FFCC00" />
+                    <rect width="24" height="2" y="2" fill="#C60B1E" />
+                    <rect width="24" height="2" y="4" fill="#FFCC00" />
+                    <rect width="24" height="2" y="6" fill="#C60B1E" />
+                    <rect width="24" height="2" y="8" fill="#FFCC00" />
+                    <rect width="24" height="2" y="10" fill="#C60B1E" />
+                    <rect width="24" height="2" y="12" fill="#FFCC00" />
+                    <rect width="24" height="2" y="14" fill="#C60B1E" />
+                </svg> VAL
+            </button>
+        </div>
     </nav>
 
     <!-- HERO -->
@@ -781,264 +799,239 @@
             <circle cx="250" cy="250" r="32" stroke="#F8F3EB" stroke-width="1.5" />
         </svg>
         <div class="gallery-hero-num">02</div>
-        <p class="gallery-hero-tag">Trabajos realizados · Piezas únicas</p>
-        <h1 class="gallery-hero-title">Galería de<br><strong>trabajos</strong></h1>
+        <p class="gallery-hero-tag" data-i18n-gallery="hero.tag">Treballs realitzats · Peces úniques</p>
+        <h1 class="gallery-hero-title" data-i18n-gallery="hero.title">Galeria de<br><strong>treballs</strong></h1>
         <div class="gallery-hero-count">
-            <div class="gallery-hero-count-num">16</div>
-            <div class="gallery-hero-count-label">Piezas mostradas</div>
+            <div class="gallery-hero-count-num">14</div>
+            <div class="gallery-hero-count-label" data-i18n-gallery="hero.count">Peces mostrades</div>
         </div>
     </section>
 
     <!-- FILTROS -->
     <div class="filters">
-        <span class="filter-label">Filtrar por</span>
-        <button class="filter-btn active" data-filter="all">Todos</button>
-        <button class="filter-btn" data-filter="mesas">Mesas</button>
-        <button class="filter-btn" data-filter="lamparas">Lámparas</button>
-        <button class="filter-btn" data-filter="marcos">Marcos</button>
-        <button class="filter-btn" data-filter="restauracion">Restauración</button>
-        <button class="filter-btn" data-filter="decoracion">Decoración</button>
+        <span class="filter-label" data-i18n-gallery="filter.label">Filtrar per</span>
+        <button class="filter-btn active" data-filter="all" data-i18n-gallery="filter.all">Tots</button>
+        <button class="filter-btn" data-filter="mesas" data-i18n-gallery="filter.mesas">Taules</button>
+        <button class="filter-btn" data-filter="lamparas" data-i18n-gallery="filter.lamparas">Llums</button>
+        <button class="filter-btn" data-filter="marcos" data-i18n-gallery="filter.marcos">Marcs</button>
+        <button class="filter-btn" data-filter="restauracion" data-i18n-gallery="filter.restauracion">Restauració</button>
+        <button class="filter-btn" data-filter="decoracion" data-i18n-gallery="filter.decoracion">Decoració</button>
     </div>
 
     <!-- GRID -->
     <section class="gallery-section">
         <div class="gallery-grid" id="galleryGrid">
 
-            <!--
-      INSTRUCCIONES PARA AÑADIR FOTOS:
-      1. Pon tus fotos optimizadas en public/img/gallery/
-      2. Sustituye cada src="img/gallery/foto-XX.webp" por el nombre real de tu archivo
-      3. Cambia el data-name y data-mat con el nombre y material de cada pieza
-      4. Ajusta las clases de tamaño: cell-big, cell-wide, cell-tall, o ninguna (normal)
-         - cell-big  → ocupa 2 columnas y 2 filas (para la foto más impactante)
-         - cell-wide → ocupa 2 columnas (fotos apaisadas)
-         - cell-tall → ocupa 2 filas (fotos verticales)
-         - (sin clase) → tamaño normal 1x1
-    -->
-
-            <div class="gallery-item cell-big reveal" data-category="mesas" data-name="Mesa de comedor"
-                data-mat="Madera de olivo">
-                <img src="img/gallery/foto-01.webp" alt="Mesa de comedor en madera de olivo" loading="lazy">
+            <!-- foto-01: Restaurant interior - large table setup -->
+            <div class="gallery-item cell-big reveal" data-category="restauracion" data-name="Interiorisme restaurant"
+                data-mat="Fusta reciclada · Obra completa">
+                <img src="img/gallery/foto-01.webp" alt="Interiorisme de restaurant amb fusta" loading="lazy">
                 <div class="gallery-overlay">
                     <div class="overlay-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5">
                             <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
                         </svg></div>
                     <div class="gallery-overlay-content">
-                        <div class="overlay-name">Mesa de comedor</div>
-                        <div class="overlay-mat">Madera de olivo</div>
+                        <div class="overlay-name">Interiorisme restaurant</div>
+                        <div class="overlay-mat">Fusta reciclada · Obra completa</div>
                     </div>
                 </div>
             </div>
 
-            <div class="gallery-item reveal" data-category="marcos" data-name="Marco decorativo"
-                data-mat="Madera de palet">
-                <img src="img/gallery/foto-02.webp" alt="Marco decorativo en palet" loading="lazy">
+            <!-- foto-02: Restaurant interior angle 2 -->
+            <div class="gallery-item reveal" data-category="restauracion" data-name="Restaurant · Detall sala"
+                data-mat="Mobiliari a mida">
+                <img src="img/gallery/foto-02.webp" alt="Detall sala restaurant" loading="lazy">
                 <div class="gallery-overlay">
                     <div class="overlay-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5">
                             <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
                         </svg></div>
                     <div class="gallery-overlay-content">
-                        <div class="overlay-name">Marco decorativo</div>
-                        <div class="overlay-mat">Madera de palet</div>
+                        <div class="overlay-name">Restaurant · Detall sala</div>
+                        <div class="overlay-mat">Mobiliari a mida</div>
                     </div>
                 </div>
             </div>
 
-            <div class="gallery-item reveal" data-category="lamparas" data-name="Lámpara de techo"
-                data-mat="Ramas de viña">
-                <img src="img/gallery/foto-03.webp" alt="Lámpara de ramas de viña" loading="lazy">
+            <!-- foto-03: Kitchen/bar shelving area -->
+            <div class="gallery-item reveal" data-category="mesas" data-name="Barra i prestatgeria"
+                data-mat="Fusta de pi · A mida">
+                <img src="img/gallery/foto-03.webp" alt="Barra i prestatgeria de cuina" loading="lazy">
                 <div class="gallery-overlay">
                     <div class="overlay-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5">
                             <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
                         </svg></div>
                     <div class="gallery-overlay-content">
-                        <div class="overlay-name">Lámpara de techo</div>
-                        <div class="overlay-mat">Ramas de viña</div>
+                        <div class="overlay-name">Barra i prestatgeria</div>
+                        <div class="overlay-mat">Fusta de pi · A mida</div>
                     </div>
                 </div>
             </div>
 
-            <div class="gallery-item cell-wide reveal" data-category="mesas" data-name="Mesa de centro"
-                data-mat="Listones de palet">
-                <img src="img/gallery/foto-04.webp" alt="Mesa de centro en palet" loading="lazy">
+            <!-- foto-06: Dining table with chairs -->
+            <div class="gallery-item cell-wide reveal" data-category="mesas" data-name="Taula de menjador"
+                data-mat="Fusta de pi massís">
+                <img src="img/gallery/foto-06.webp" alt="Taula de menjador de pi massís" loading="lazy">
                 <div class="gallery-overlay">
                     <div class="overlay-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5">
                             <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
                         </svg></div>
                     <div class="gallery-overlay-content">
-                        <div class="overlay-name">Mesa de centro</div>
-                        <div class="overlay-mat">Listones de palet</div>
+                        <div class="overlay-name">Taula de menjador</div>
+                        <div class="overlay-mat">Fusta de pi massís</div>
                     </div>
                 </div>
             </div>
 
-            <div class="gallery-item cell-tall reveal" data-category="decoracion" data-name="Rótulo personalizado"
-                data-mat="Pino y madera reciclada">
-                <img src="img/gallery/foto-05.webp" alt="Rótulo personalizado" loading="lazy">
+            <!-- foto-13: Table top detail -->
+            <div class="gallery-item cell-wide reveal" data-category="mesas" data-name="Detall taula de menjador"
+                data-mat="Pi massís · Acabat natural">
+                <img src="img/gallery/foto-13.webp" alt="Detall taula de menjador" loading="lazy">
                 <div class="gallery-overlay">
                     <div class="overlay-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5">
                             <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
                         </svg></div>
                     <div class="gallery-overlay-content">
-                        <div class="overlay-name">Rótulo personalizado</div>
-                        <div class="overlay-mat">Pino y madera reciclada</div>
+                        <div class="overlay-name">Detall taula de menjador</div>
+                        <div class="overlay-mat">Pi massís · Acabat natural</div>
                     </div>
                 </div>
             </div>
 
-            <div class="gallery-item reveal" data-category="restauracion" data-name="Silla restaurada"
-                data-mat="Roble recuperado">
-                <img src="img/gallery/foto-06.webp" alt="Silla restaurada en roble" loading="lazy">
+            <!-- foto-04: Bookshelf with LED -->
+            <div class="gallery-item reveal" data-category="decoracion" data-name="Prestatgeria amb LED"
+                data-mat="Fusta de pi · Tira LED">
+                <img src="img/gallery/foto-04.webp" alt="Prestatgeria amb il·luminació LED" loading="lazy">
                 <div class="gallery-overlay">
                     <div class="overlay-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5">
                             <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
                         </svg></div>
                     <div class="gallery-overlay-content">
-                        <div class="overlay-name">Silla restaurada</div>
-                        <div class="overlay-mat">Roble recuperado</div>
+                        <div class="overlay-name">Prestatgeria amb LED</div>
+                        <div class="overlay-mat">Fusta de pi · Tira LED</div>
                     </div>
                 </div>
             </div>
 
-            <div class="gallery-item reveal" data-category="marcos" data-name="Marco bastidor"
-                data-mat="Madera de palet">
-                <img src="img/gallery/foto-07.webp" alt="Marco bastidor" loading="lazy">
+            <!-- foto-05: Built-in wardrobe -->
+            <div class="gallery-item reveal" data-category="mesas" data-name="Armari encastat"
+                data-mat="Fusta · Fabricació a mida">
+                <img src="img/gallery/foto-05.webp" alt="Armari encastat a mida" loading="lazy">
                 <div class="gallery-overlay">
                     <div class="overlay-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5">
                             <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
                         </svg></div>
                     <div class="gallery-overlay-content">
-                        <div class="overlay-name">Marco bastidor</div>
-                        <div class="overlay-mat">Madera de palet</div>
+                        <div class="overlay-name">Armari encastat</div>
+                        <div class="overlay-mat">Fusta · Fabricació a mida</div>
                     </div>
                 </div>
             </div>
 
-            <div class="gallery-item cell-wide reveal" data-category="restauracion" data-name="Aparador restaurado"
-                data-mat="Madera de derribo">
-                <img src="img/gallery/foto-08.webp" alt="Aparador restaurado" loading="lazy">
+            <!-- foto-09: Sign "SOMNIA" -->
+            <div class="gallery-item reveal" data-category="decoracion" data-name="Rètol personalitzat"
+                data-mat="Fusta de pi · Lletres tallades">
+                <img src="img/gallery/foto-09.webp" alt="Rètol Somnia personalitzat" loading="lazy">
                 <div class="gallery-overlay">
                     <div class="overlay-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5">
                             <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
                         </svg></div>
                     <div class="gallery-overlay-content">
-                        <div class="overlay-name">Aparador restaurado</div>
-                        <div class="overlay-mat">Madera de derribo</div>
+                        <div class="overlay-name">Rètol personalitzat</div>
+                        <div class="overlay-mat">Fusta de pi · Lletres tallades</div>
                     </div>
                 </div>
             </div>
 
-            <div class="gallery-item reveal" data-category="lamparas" data-name="Lámpara de pie"
-                data-mat="Ramas de olivo">
-                <img src="img/gallery/foto-09.webp" alt="Lámpara de pie en olivo" loading="lazy">
+            <!-- foto-07: Barrel restored -->
+            <div class="gallery-item reveal" data-category="restauracion" data-name="Barrica restaurada"
+                data-mat="Fusta de roure">
+                <img src="img/gallery/foto-07.webp" alt="Barrica restaurada de roure" loading="lazy">
                 <div class="gallery-overlay">
                     <div class="overlay-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5">
                             <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
                         </svg></div>
                     <div class="gallery-overlay-content">
-                        <div class="overlay-name">Lámpara de pie</div>
-                        <div class="overlay-mat">Ramas de olivo</div>
+                        <div class="overlay-name">Barrica restaurada</div>
+                        <div class="overlay-mat">Fusta de roure</div>
                     </div>
                 </div>
             </div>
 
-            <div class="gallery-item reveal" data-category="decoracion" data-name="Tabla de corte"
-                data-mat="Madera de olivo">
-                <img src="img/gallery/foto-10.webp" alt="Tabla de corte en olivo" loading="lazy">
+            <!-- foto-08: Photo frame collage -->
+            <div class="gallery-item reveal" data-category="marcos" data-name="Marc de fotos col·lage"
+                data-mat="Fusta de pi · Fet a mà">
+                <img src="img/gallery/foto-08.webp" alt="Marc de fotos col·lage" loading="lazy">
                 <div class="gallery-overlay">
                     <div class="overlay-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5">
                             <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
                         </svg></div>
                     <div class="gallery-overlay-content">
-                        <div class="overlay-name">Tabla de corte</div>
-                        <div class="overlay-mat">Madera de olivo</div>
+                        <div class="overlay-name">Marc de fotos col·lage</div>
+                        <div class="overlay-mat">Fusta de pi · Fet a mà</div>
                     </div>
                 </div>
             </div>
 
-            <div class="gallery-item cell-tall reveal" data-category="mesas" data-name="Mesita de noche"
-                data-mat="Palet y pino">
-                <img src="img/gallery/foto-11.webp" alt="Mesita de noche" loading="lazy">
+            <!-- foto-10: Foosball table restored -->
+            <div class="gallery-item reveal" data-category="restauracion" data-name="Futbolí restaurat"
+                data-mat="Fusta · Restauració completa">
+                <img src="img/gallery/foto-10.webp" alt="Futbolí restaurat" loading="lazy">
                 <div class="gallery-overlay">
                     <div class="overlay-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5">
                             <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
                         </svg></div>
                     <div class="gallery-overlay-content">
-                        <div class="overlay-name">Mesita de noche</div>
-                        <div class="overlay-mat">Palet y pino</div>
+                        <div class="overlay-name">Futbolí restaurat</div>
+                        <div class="overlay-mat">Fusta · Restauració completa</div>
                     </div>
                 </div>
             </div>
 
-            <div class="gallery-item reveal" data-category="decoracion" data-name="Decoración inicial"
-                data-mat="Madera reciclada">
-                <img src="img/gallery/foto-12.webp" alt="Decoración con iniciales" loading="lazy">
+            <!-- foto-11: Art frame with watercolors -->
+            <div class="gallery-item reveal" data-category="marcos" data-name="Marc artístic amb LED"
+                data-mat="Fusta de pi · Il·luminació LED">
+                <img src="img/gallery/foto-11.webp" alt="Marc artístic amb il·luminació LED" loading="lazy">
                 <div class="gallery-overlay">
                     <div class="overlay-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5">
                             <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
                         </svg></div>
                     <div class="gallery-overlay-content">
-                        <div class="overlay-name">Decoración inicial</div>
-                        <div class="overlay-mat">Madera reciclada</div>
+                        <div class="overlay-name">Marc artístic amb LED</div>
+                        <div class="overlay-mat">Fusta de pi · Il·luminació LED</div>
                     </div>
                 </div>
             </div>
 
-            <div class="gallery-item cell-wide reveal" data-category="mesas" data-name="Mesa con resina epoxi"
-                data-mat="Poda y resina">
-                <img src="img/gallery/foto-13.webp" alt="Mesa con resina epoxi" loading="lazy">
+            <!-- foto-12: Children's desk -->
+            <div class="gallery-item cell-wide reveal" data-category="mesas" data-name="Escriptori infantil"
+                data-mat="Fusta de pi · A mida">
+                <img src="img/gallery/foto-12.webp" alt="Escriptori infantil de fusta" loading="lazy">
                 <div class="gallery-overlay">
                     <div class="overlay-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5">
                             <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
                         </svg></div>
                     <div class="gallery-overlay-content">
-                        <div class="overlay-name">Mesa con resina epoxi</div>
-                        <div class="overlay-mat">Poda y resina</div>
+                        <div class="overlay-name">Escriptori infantil</div>
+                        <div class="overlay-mat">Fusta de pi · A mida</div>
                     </div>
                 </div>
             </div>
 
-            <div class="gallery-item reveal" data-category="marcos" data-name="Marco con LED"
-                data-mat="Palet y tira LED">
-                <img src="img/gallery/foto-14.webp" alt="Marco con iluminación LED" loading="lazy">
+            <!-- foto-14: Children's room with shelf -->
+            <div class="gallery-item reveal" data-category="mesas" data-name="Habitació infantil"
+                data-mat="Prestatgeria i marc · Pi">
+                <img src="img/gallery/foto-14.webp" alt="Habitació infantil amb mobles a mida" loading="lazy">
                 <div class="gallery-overlay">
                     <div class="overlay-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5">
                             <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
                         </svg></div>
                     <div class="gallery-overlay-content">
-                        <div class="overlay-name">Marco con LED</div>
-                        <div class="overlay-mat">Palet y tira LED</div>
+                        <div class="overlay-name">Habitació infantil</div>
+                        <div class="overlay-mat">Prestatgeria i marc · Pi</div>
                     </div>
                 </div>
             </div>
 
-            <div class="gallery-item reveal" data-category="restauracion" data-name="Cómoda restaurada"
-                data-mat="Madera recuperada">
-                <img src="img/gallery/foto-15.webp" alt="Cómoda restaurada" loading="lazy">
-                <div class="gallery-overlay">
-                    <div class="overlay-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5">
-                            <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
-                        </svg></div>
-                    <div class="gallery-overlay-content">
-                        <div class="overlay-name">Cómoda restaurada</div>
-                        <div class="overlay-mat">Madera recuperada</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="gallery-item reveal" data-category="lamparas" data-name="Lámpara de almendro"
-                data-mat="Ramas de almendro">
-                <img src="img/gallery/foto-16.webp" alt="Lámpara de almendro" loading="lazy">
-                <div class="gallery-overlay">
-                    <div class="overlay-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5">
-                            <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
-                        </svg></div>
-                    <div class="gallery-overlay-content">
-                        <div class="overlay-name">Lámpara de almendro</div>
-                        <div class="overlay-mat">Ramas de almendro</div>
-                    </div>
-                </div>
-            </div>
 
         </div>
     </section>
@@ -1050,16 +1043,15 @@
                 <line x1="19" y1="12" x2="5" y2="12" />
                 <polyline points="12,5 5,12 12,19" />
             </svg>
-            Volver al inicio
+            <span data-i18n-gallery="back.link">Tornar a l'inici</span>
         </a>
-        <span class="back-text">Cada pieza, una historia</span>
+        <span class="back-text" data-i18n-gallery="back.text">Cada peça, una història</span>
     </div>
 
     <!-- FOOTER -->
     <footer>
         <div class="f-logo">Pua / Fusteria</div>
-        <div class="f-center">Carrer Remur, 51 · Benlloc, Castellón<br>© 2025 Pua Fusteria · Todos los derechos
-            reservados</div>
+        <div class="f-center">Carrer Remur, 51 · Benlloc, Castelló<br>© 2025 Pua Fusteria · <span data-i18n-gallery="footer.rights">Tots els drets reservats</span></div>
         <div class="f-right"><a href="https://www.instagram.com/puafusteria/" target="_blank"
                 style="color:rgba(248,243,235,.22);text-decoration:none">@puafusteria</a></div>
     </footer>
@@ -1199,6 +1191,87 @@
         // Cerrar al hacer clic fuera de la imagen
         lightbox.addEventListener('click', e => {
             if (e.target === lightbox) closeLightbox();
+        });
+
+        // ── i18n Gallery ─────────────────────────────────────────
+        const GALLERY_TRANSLATIONS = {
+            es: {
+                "hero.tag": "Trabajos realizados · Piezas únicas",
+                "hero.title": "Galería de<br><strong>trabajos</strong>",
+                "hero.count": "Piezas mostradas",
+                "filter.label": "Filtrar por",
+                "filter.all": "Todos",
+                "filter.mesas": "Mesas",
+                "filter.lamparas": "Lámparas",
+                "filter.marcos": "Marcos",
+                "filter.restauracion": "Restauración",
+                "filter.decoracion": "Decoración",
+                "back.link": "Volver al inicio",
+                "back.text": "Cada pieza, una historia",
+                "footer.rights": "Todos los derechos reservados",
+            },
+            val: {
+                "hero.tag": "Treballs realitzats · Peces úniques",
+                "hero.title": "Galeria de<br><strong>treballs</strong>",
+                "hero.count": "Peces mostrades",
+                "filter.label": "Filtrar per",
+                "filter.all": "Tots",
+                "filter.mesas": "Taules",
+                "filter.lamparas": "Llums",
+                "filter.marcos": "Marcs",
+                "filter.restauracion": "Restauració",
+                "filter.decoracion": "Decoració",
+                "back.link": "Tornar a l'inici",
+                "back.text": "Cada peça, una història",
+                "footer.rights": "Tots els drets reservats",
+            }
+        };
+
+        const NAV_TRANSLATIONS = {
+            es: ["Nosotros", "Servicios", "Galería", "Presupuesto"],
+            val: ["Nosaltres", "Serveis", "Galeria", "Pressupost"],
+        };
+
+        function applyGalleryLang(lang) {
+            const t = GALLERY_TRANSLATIONS[lang];
+            if (!t) return;
+            document.querySelectorAll('[data-i18n-gallery]').forEach(el => {
+                const key = el.getAttribute('data-i18n-gallery');
+                if (t[key] !== undefined) {
+                    if (key === 'hero.title') {
+                        el.innerHTML = t[key];
+                    } else {
+                        el.textContent = t[key];
+                    }
+                }
+            });
+            // Nav links
+            const navTr = NAV_TRANSLATIONS[lang];
+            if (navTr) {
+                const links = document.querySelectorAll('.nav-links a');
+                links.forEach((a, i) => { if (navTr[i]) a.textContent = navTr[i]; });
+            }
+            // Update buttons
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                const isActive = btn.dataset.lang === lang;
+                btn.classList.toggle('active', isActive);
+                if (isActive) {
+                    btn.style.borderColor = 'var(--sand)';
+                    btn.style.color = 'var(--cream)';
+                } else {
+                    btn.style.borderColor = 'rgba(248,243,235,.2)';
+                    btn.style.color = 'rgba(248,243,235,.65)';
+                }
+            });
+            localStorage.setItem('pua-lang', lang);
+            document.documentElement.lang = lang === 'val' ? 'ca' : 'es';
+        }
+
+        // Init language
+        const savedLang = localStorage.getItem('pua-lang') || 'val';
+        applyGalleryLang(savedLang);
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.addEventListener('click', () => applyGalleryLang(btn.dataset.lang));
         });
     </script>
 </body>
