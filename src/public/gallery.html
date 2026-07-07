@@ -723,25 +723,6 @@
 
             #nav {
                 padding: 1rem 1.5rem;
-                flex-wrap: wrap;
-            }
-
-            /* Nav: los enlaces pasan a su propia fila centrada para no desbordar */
-            .nav-links {
-                order: 3;
-                width: 100%;
-                flex-basis: 100%;
-                justify-content: center;
-                gap: 1.6rem !important;
-                margin-top: .8rem;
-            }
-
-            .nav-links a {
-                font-size: .7rem;
-            }
-
-            .lang-switcher {
-                margin-left: auto !important;
             }
 
             .gallery-hero {
@@ -771,18 +752,77 @@
                 grid-row: span 1;
             }
 
-            /* Nav muy estrecho: enlaces más compactos */
+            .nav-logo {
+                font-size: 1.3rem;
+            }
+        }
+
+        /* ── NAV MÓVIL: menú hamburguesa (≤ 768px) ──────────────── */
+        @media (max-width: 768px) {
+
+            /* Mostrar botón hamburguesa */
+            .nav-hamburger {
+                display: flex;
+            }
+
+            /* Convertir la lista de enlaces en overlay a pantalla completa.
+               Se anulan los overrides desktop (position:static!important, etc.) */
             .nav-links {
-                gap: 1rem !important;
+                position: fixed !important;
+                inset: 0 !important;
+                height: auto !important;
+                transform: none !important;
+                display: none;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: .3rem !important;
+                background: var(--bark) !important;
+                z-index: 999;
+                margin: 0;
+                padding: 0;
+            }
+
+            .nav-links.open {
+                display: flex;
+            }
+
+            .nav-links li {
+                width: 100%;
+                text-align: center;
+                list-style: none;
             }
 
             .nav-links a {
-                font-size: .62rem;
-                letter-spacing: .08em;
+                display: block;
+                font-family: 'Cormorant Garamond', serif;
+                font-size: 1.5rem;
+                font-weight: 300;
+                letter-spacing: .12em;
+                padding: .9rem 2rem;
+                color: var(--cream) !important;
+                opacity: .7;
             }
 
-            .nav-logo {
-                font-size: 1.3rem;
+            .nav-links a.active,
+            .nav-links a:hover {
+                opacity: 1;
+            }
+
+            .nav-links .nav-cta {
+                display: inline-block;
+                margin-top: 1.2rem;
+                background: var(--sand);
+                color: var(--char) !important;
+                padding: .8rem 2.6rem;
+                font-family: 'Jost', sans-serif;
+                font-size: .8rem;
+                letter-spacing: .16em;
+            }
+
+            /* Ocultar selector de idioma en el menú móvil (inline style -> !important) */
+            .lang-switcher {
+                display: none !important;
             }
         }
     </style>
@@ -819,6 +859,9 @@
                 </svg> VAL
             </button>
         </div>
+        <button class="nav-hamburger" id="navHamburger" aria-label="Menú" aria-expanded="false">
+            <span></span><span></span><span></span>
+        </button>
     </nav>
 
     <!-- HERO -->
@@ -1129,6 +1172,24 @@
         // ── Nav scroll ────────────────────────────────────────────
         const nav = document.getElementById('nav');
         window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 60));
+
+        // ── Menú hamburguesa ──────────────────────────────────────
+        const hamburger = document.getElementById('navHamburger');
+        const navLinks = document.querySelector('.nav-links');
+        hamburger.addEventListener('click', () => {
+            const isOpen = hamburger.classList.toggle('open');
+            navLinks.classList.toggle('open', isOpen);
+            hamburger.setAttribute('aria-expanded', isOpen);
+            document.body.style.overflow = isOpen ? 'hidden' : '';
+        });
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('open');
+                navLinks.classList.remove('open');
+                hamburger.setAttribute('aria-expanded', 'false');
+                document.body.style.overflow = '';
+            });
+        });
 
         // ── Reveal ────────────────────────────────────────────────
         const obs = new IntersectionObserver((entries) => {
