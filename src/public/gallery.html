@@ -723,6 +723,25 @@
 
             #nav {
                 padding: 1rem 1.5rem;
+                flex-wrap: wrap;
+            }
+
+            /* Nav: los enlaces pasan a su propia fila centrada para no desbordar */
+            .nav-links {
+                order: 3;
+                width: 100%;
+                flex-basis: 100%;
+                justify-content: center;
+                gap: 1.6rem !important;
+                margin-top: .8rem;
+            }
+
+            .nav-links a {
+                font-size: .7rem;
+            }
+
+            .lang-switcher {
+                margin-left: auto !important;
             }
 
             .gallery-hero {
@@ -750,6 +769,20 @@
             .cell-tall {
                 grid-column: span 1;
                 grid-row: span 1;
+            }
+
+            /* Nav muy estrecho: enlaces más compactos */
+            .nav-links {
+                gap: 1rem !important;
+            }
+
+            .nav-links a {
+                font-size: .62rem;
+                letter-spacing: .08em;
+            }
+
+            .nav-logo {
+                font-size: 1.3rem;
             }
         }
     </style>
